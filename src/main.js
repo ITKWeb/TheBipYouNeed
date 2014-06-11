@@ -13,6 +13,7 @@ define(function(require, exports, module) {
     var tempo=1;
     var size = [100,100];
     var color = ['#FA5C4F', '#E15347', '#C84A3F' ,  '#AF4037','#96372F'];
+    var durationTime = 150;
     // create the main context
     var mainContext = Engine.createContext();
     var transitionableTransform = new TransitionableTransform();
@@ -20,7 +21,7 @@ define(function(require, exports, module) {
 
     //Anomation pour la surface de commande
     var modifier = new Modifier({
-    origin: [.5,.8],
+    origin: [.5,.7],
     transform: transitionableTransform
     });
 
@@ -64,8 +65,11 @@ define(function(require, exports, module) {
 
     //animation a chaque temps
     surface.animate = function(){
-        transitionableTransform.setScale([1.5,1.5,1.5], {duration: 100});
-        transitionableTransform.setScale([1,1,1], {duration: 100});
+        var newDuration=durationTime-(tempo-1)*20;
+
+        transitionableTransform.setScale([1.1,1.1,1.1], {duration: newDuration});
+        transitionableTransform.setScale([1,1,1], {duration: newDuration});
+        console.log('dur',newDuration);
     };
 
     //lien metronome/surface de commande
