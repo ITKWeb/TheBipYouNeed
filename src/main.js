@@ -29,7 +29,11 @@ define(function(require, exports, module) {
         origin: [0.5, 0.5],
         content: 'assets/logo.png',
         classes: ['double-sided'],
+    });
 
+    /* click mute */
+    logo.on('click', function(){
+        Metronome.sound===false ? Metronome.sound=true : Metronome.sound=false;
     });
 
     var surface = new Surface({
