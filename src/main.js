@@ -83,8 +83,8 @@ define(function(require, exports, module) {
       Metronome.bpm(tempo*tempo_plus);
       surface.setContent(tempo*tempo_plus);
 
-      surface.setSize([100+tempo*10,100+tempo*10]);
-      surface.setProperties({ lineHeight: 100+tempo*10+"px",backgroundColor: color[tempo-1]});
+      surface.setSize([size[0]+tempo*10,size[0]+tempo*10]);
+      surface.setProperties({ lineHeight: size[0]+tempo*10+"px",backgroundColor: color[tempo-1]});
 
 
 
