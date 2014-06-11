@@ -196,35 +196,6 @@
                         }
                     }
                     $(document).ready(function() {
-                        $('#bug').click(function() {
-                            Metronome.stop();
-                            $('#bug_cont').fadeIn(function() {
-                                $(this).children('.response').focus();
-                            });
-                        });
-                        $('#feedback').click(function() {
-                            Metronome.stop();
-                            $('#feedback_cont').fadeIn(function() {
-                                $(this).children('.response').focus();
-                            });
-                        });
-                        $('.submit').click(function() {
-                            var parent = $(this).parent(), message = escape(parent.children('.response').val()), query = (parent[0].id === 'bug_cont' ? '&bug=1' : '');
-                            if(message !== '') {
-                                $.ajax({
-                                        url : '/scripts/feedback.php?message=' + message + query
-                                });
-                                parent.fadeOut(function() {
-                                    $('#bugfeedbackresponse').text('Thanks for your feedback!').fadeIn();
-                                });
-                            } else {
-                                parent.children('.result')[0].innerHTML = 'Please enter text...';
-                                parent.children('.response').focus();
-                            }
-                        });
-                        $('.cancel').click(function() {
-                            $(this).parent().fadeOut();
-                        });
                         var $tempo = $("#temponame"), $bpm = $("#bpm"), $numer = $("#numerator"), $denom = $("#denominator"), $double = $("#double"), $mute = $("#mute");
                         Metronome.element = document.getElementById('metronome');
                         Metronome.error = function (error, runtime) {
@@ -235,9 +206,6 @@
                             if (error.stack) {
                                 stack = error.stack;
                             }
-                            $.ajax({
-                                    url: "/scripts/exceptions.php?uri=" + escape(location.href) + "&message=" + escape(error.message) + "&type=" + escape(etype) + "&stack=" + escape(stack) + "&runtime=" + escape(runtime)
-                            });
                         };
                         $tempo[0].innerHTML = Metronome.tempo();
                         $bpm[0].value = Metronome.bpm();
