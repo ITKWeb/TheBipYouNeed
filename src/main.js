@@ -70,16 +70,19 @@ define(function(require, exports, module) {
     });
 
     surface.animate = function(){
-        console.log("animate");
+        transitionableTransform.setScale([2,2,1], {duration: 100});
+        transitionableTransform.setScale([1,1,1], {duration: 100});
     };
 
     Metronome.surface = surface;
 
 
     eventHandler.on('clickedSurface', function() {
-
       tempo===5 ? tempo=1 : tempo=tempo+1;
-      Metronome.bpm(tempo*50)
+
+      tempo_plus = 50;
+      Metronome.bpm(tempo*tempo_plus)
+      surface.setContent(tempo*tempo_plus);
 
 /*
       size= [100+(tempo-1)*10,100+(tempo-1)*10] ;
@@ -90,8 +93,6 @@ define(function(require, exports, module) {
             lineHeight: 100+(tempo-1)*10+"px"
         });*/
 
-     transitionableTransform.setScale([3,3,1], {duration: 1000});
-     transitionableTransform.setScale([1,1,1], {duration: 1000});
     });
 
 
