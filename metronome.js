@@ -6,7 +6,7 @@ var Metronome=(
         canPlayMp3=false,
         supportedExtension='mp3',
         mediaDir='assets/',
-        accentFile=mediaDir+'pling.',
+        accentFile=mediaDir+'zen.',
         clickFile=mediaDir+'bump.',
         halfClickFile=mediaDir+'Half-Click.',
         timeout,
