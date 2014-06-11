@@ -7,13 +7,20 @@ define(function(require, exports, module) {
     var Surface = require('famous/core/Surface');
     var InputSurface = require("famous/surfaces/InputSurface");
     var EventHandler = require('famous/core/EventHandler');
-   
+   var TransitionableTransform = require("famous/transitions/TransitionableTransform");
 
     //temps
     var tempo=1;
     var size = [100,100];
     // create the main context
     var mainContext = Engine.createContext();
+    var transitionableTransform = new TransitionableTransform();
+
+    var modifier = new Modifier({
+    origin: [.5,.5],
+    transform: transitionableTransform
+});
+
 
     // your app here
     var logo = new ImageSurface({
@@ -52,20 +59,23 @@ define(function(require, exports, module) {
     });
 
     eventHandler.on('clickedSurface', function() {
-      tempo===10 ? tempo=1 : tempo=tempo+1;
+/*    tempo===10 ? tempo=1 : tempo=tempo+1;
 
       size= [100+(tempo-1)*10,100+(tempo-1)*10] ;
-      /*size.width = size.height;*/
+      size.width = size.height;
       surface.setContent(tempo);
       surface.setSize(size);
         surface.setProperties({
             lineHeight: 100+(tempo-1)*10+"px"
         });
+*/
+     transitionableTransform.setScale([3,3,1], {duration: 1000});
+     transitionableTransform.setScale([1,1,1], {duration: 1000});
     });
 
 
     mainContext.add(new Modifier({origin: [.5, .2]})).add(logo);
-    mainContext.add(new Modifier({origin: [.5, .8]})).add(surface);
+    mainContext.add(modifier).add(surface);
 
 
 });
