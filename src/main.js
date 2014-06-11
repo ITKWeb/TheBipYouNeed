@@ -5,25 +5,27 @@ define(function(require, exports, module) {
     var Transform = require('famous/core/Transform');
     var ImageSurface = require('famous/surfaces/ImageSurface');
     var Surface = require('famous/core/Surface');
-    var InputSurface = require("famous/surfaces/InputSurface");
     var EventHandler = require('famous/core/EventHandler');
    var TransitionableTransform = require("famous/transitions/TransitionableTransform");
 
 
-    //temps
+    //tempo + taille d'origine
     var tempo=1;
     var size = [100,100];
+    var color = ['#FA5C4F', '#E15347', '#C84A3F' ,  '#AF4037','#96372F'];
     // create the main context
     var mainContext = Engine.createContext();
     var transitionableTransform = new TransitionableTransform();
+    var eventHandler = new EventHandler();
 
+    //Anomation pour la surface de commande
     var modifier = new Modifier({
-    origin: [.5,.5],
+    origin: [.5,.8],
     transform: transitionableTransform
     });
 
 
-    // your app here
+    // logo indique si son actif ou pe
     var logo = new ImageSurface({
         size: [true,true],
         origin: [0.5, 0.5],
@@ -42,6 +44,7 @@ define(function(require, exports, module) {
         }
     });
 
+    //surface de commande
     var surface = new Surface({
         size: size,
         content: tempo,
@@ -50,48 +53,37 @@ define(function(require, exports, module) {
             lineHeight: size[0]+"px",
             textAlign: "center",
             borderRadius:'50%',
-            backgroundColor: '#FA5C4F'
+            backgroundColor: color[0]
         }
     });
 
-
-    var input = new InputSurface({
-        size: [400, true],
-        name: 'inputSurface',
-        placeholder: '',
-        value: '',
-        type: 'text'
-    });
-
-    var eventHandler = new EventHandler();
-
+    //1 clic = changement de tempo
     surface.on('click', function() {
         eventHandler.emit('clickedSurface');
     });
 
+    //animation a chaque temps
     surface.animate = function(){
-        transitionableTransform.setScale([2,2,1], {duration: 100});
+        transitionableTransform.setScale([1.5,1.5,1.5], {duration: 100});
         transitionableTransform.setScale([1,1,1], {duration: 100});
     };
 
+    //lien metronome/surface de commande
     Metronome.surface = surface;
 
 
+    //1clic = surface de commande + grande, on indique le tempo au centre
     eventHandler.on('clickedSurface', function() {
       tempo===5 ? tempo=1 : tempo=tempo+1;
 
       tempo_plus = 50;
-      Metronome.bpm(tempo*tempo_plus)
+      Metronome.bpm(tempo*tempo_plus);
       surface.setContent(tempo*tempo_plus);
 
-/*
-      size= [100+(tempo-1)*10,100+(tempo-1)*10] ;
-      size.width = size.height;
-      surface.setContent(tempo);
-      surface.setSize(size);
-        surface.setProperties({
-            lineHeight: 100+(tempo-1)*10+"px"
-        });*/
+      surface.setSize([100+tempo*10,100+tempo*10]);
+      surface.setProperties({ lineHeight: 100+tempo*10+"px",backgroundColor: color[tempo-1]});
+
+
 
     });
 
