@@ -69,7 +69,6 @@ define(function(require, exports, module) {
 
         transitionableTransform.setScale([1.1,1.1,1.1], {duration: newDuration});
         transitionableTransform.setScale([1,1,1], {duration: newDuration});
-        console.log('dur',newDuration);
     };
 
     //lien metronome/surface de commande
