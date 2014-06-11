@@ -7,7 +7,6 @@ define(function(require, exports, module) {
     var Surface = require('famous/core/Surface');
     var InputSurface = require("famous/surfaces/InputSurface");
     var EventHandler = require('famous/core/EventHandler');
-   
 
     //temps
     var tempo=1;
@@ -51,8 +50,16 @@ define(function(require, exports, module) {
         eventHandler.emit('clickedSurface');
     });
 
+    surface.animate = function(){
+        console.log("animate");
+    };
+
+    Metronome.surface = surface;
+
+
     eventHandler.on('clickedSurface', function() {
-      tempo===10 ? tempo=1 : tempo=tempo+1;
+      tempo===5 ? tempo=1 : tempo=tempo+1;
+      Metronome.bpm(tempo*50)
 
       size= [100+(tempo-1)*10,100+(tempo-1)*10] ;
       /*size.width = size.height;*/

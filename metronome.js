@@ -161,7 +161,10 @@ var Metronome=(
                         queued=false
                     }
                     if(Metronome.element){
-                        Metronome.element.innerHTML=leadingZero(bar,4)+'.'+leadingZero(currentNumerator,2)
+                        //Metronome.element.innerHTML=leadingZero(bar,4)+'.'+leadingZero(currentNumerator,2)
+                    }
+                    if(Metronome.surface){
+                        Metronome.surface.animate();
                     }
                     if(Metronome.sound===true){
                         if(currentNumerator===1&&n===1){
