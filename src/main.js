@@ -11,7 +11,7 @@ define(function(require, exports, module) {
 
     //tempo + taille d'origine
     var tempo=1;
-    var size = [100,100];
+    var size = [200,200];
     var color = ['#FA5C4F', '#E15347', '#C84A3F' ,  '#AF4037','#96372F'];
     var durationTime = 150;
     // create the main context
@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 
     //Anomation pour la surface de commande
     var modifier = new Modifier({
-    origin: [.5,.7],
+    origin: [.5,.8],
     transform: transitionableTransform
     });
 
