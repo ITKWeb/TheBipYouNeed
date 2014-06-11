@@ -20,7 +20,7 @@ define(function(require, exports, module) {
     var modifier = new Modifier({
     origin: [.5,.5],
     transform: transitionableTransform
-});
+    });
 
 
     // your app here
@@ -33,7 +33,13 @@ define(function(require, exports, module) {
 
     /* click mute */
     logo.on('click', function(){
-        Metronome.sound===false ? Metronome.sound=true : Metronome.sound=false;
+        if(Metronome.sound===false){
+            Metronome.sound=true;
+            logo.setContent('assets/logo.png');
+        }else{
+            Metronome.sound=false;
+            logo.setContent('assets/logo_off.png');
+        }
     });
 
     var surface = new Surface({
